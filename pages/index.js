@@ -1,4 +1,5 @@
 let recipes = [];
+let searchInput = document.getElementById("searchbox");
 
 async function loadJSON(url) {
   const res = await fetch(url);
@@ -14,13 +15,17 @@ async function getRecipes() {
 }
 
 async function filterData() {
-  let search_query = document.getElementById("searchbox").value;
-
   const filteredRecipes = recipes.filter((recipe) => {
-    return recipe.name
+    return JSON.stringify(recipe)
       .toLowerCase()
-      .normalize()
-      .includes(search_query.toLowerCase().normalize());
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(
+        searchInput.value
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+      );
   });
 
   return filteredRecipes;
@@ -51,11 +56,6 @@ async function init() {
 
 init();
 
-let typingTimer;
-let typeInterval = 500;
-let searchInput = document.getElementById("searchbox");
-
 searchInput.addEventListener("keyup", () => {
-  clearTimeout(typingTimer);
-  typingTimer = setTimeout(displayData, typeInterval);
+  displayData();
 });
