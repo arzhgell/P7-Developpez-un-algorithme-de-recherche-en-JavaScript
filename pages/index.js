@@ -18,19 +18,25 @@ async function getRecipes() {
   recipes = rep;
 }
 
+function cleanSearch(string) {
+  return string
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 async function filterData() {
-  const filteredRecipes = recipes.filter((recipe) => {
-    return JSON.stringify(recipe)
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .includes(
-        searchInput.value
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-      );
-  });
+  const filteredRecipes = [];
+
+  for (let i = 0; i < recipes.length; i++) {
+    if (
+      cleanSearch(JSON.stringify(recipes[i])).includes(
+        cleanSearch(searchInput.value)
+      )
+    ) {
+      filteredRecipes.push(recipes[i]);
+    }
+  }
 
   ingredients = new Set(
     filteredRecipes
