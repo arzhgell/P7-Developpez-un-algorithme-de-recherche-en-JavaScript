@@ -20,7 +20,7 @@
     ></script>
     <title>Les petits plats</title>
   </head>
-  <body class="flex flex-col justify-center items-center bg-lightGrey">
+  <body class="flex flex-col justify-center items-center bg-background">
     <div class="bg-hero w-full pt-14 pb-48 px-8 md:px-16 bg-cover">
       <img src="assets/images/logo.png" alt="Logo" />
       <div class="flex flex-col justify-center mt-40 w-full md:w-8/12 mx-auto">
@@ -43,29 +43,17 @@
         </div>
       </div>
     </div>
-    <div class="px-4 md:px-24">
-      <div class="mt-6 flex-col md:flex-row w-full flex gap-5">
-        <div class="p-4 bg-white rounded-xl">
-          <select class="pr-9 w-full outline-0">
-            <option>Ingredients</option>
-          </select>
-        </div>
-        <div class="p-4 bg-white rounded-xl">
-          <select class="pr-9 w-full outline-0">
-            <option>Appareils</option>
-          </select>
-        </div>
-        <div class="p-4 bg-white rounded-xl">
-          <select class="pr-9 w-full outline-0">
-            <option>Ustensiles</option>
-          </select>
-        </div>
+    <div class="px-4 md:px-24 mt-6">
+      <div class="flex justify-between items-center">
+        <div id="selects" class="w-8/12 flex justify-between gap-8"></div>
+        <p class="font-anton"><span id="count">1500</span> recettes</p>
       </div>
       <div
         class="dishes-container flex flex-wrap justify-start gap-10 mt-14"
       ></div>
     </div>
     <script src="factories/recipes.js"></script>
+    <script src="factories/select.js"></script>
     <script src="pages/index.js"></script>
   </body>
 </html>

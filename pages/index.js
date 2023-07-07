@@ -1,4 +1,8 @@
 let recipes = [];
+let ustensils = [];
+let appliances = [];
+let ingredients = [];
+
 let searchInput = document.getElementById("searchbox");
 
 async function loadJSON(url) {
@@ -28,6 +32,30 @@ async function filterData() {
       );
   });
 
+  ingredients = new Set(
+    filteredRecipes
+      .map((recipe) => {
+        return recipe.ingredients.map((ingredient) => {
+          return ingredient.ingredient;
+        });
+      })
+      .flat()
+  );
+
+  ustensils = new Set(
+    filteredRecipes
+      .map((recipe) => {
+        return recipe.ustensils;
+      })
+      .flat()
+  );
+
+  appliances = new Set(
+    filteredRecipes.map((recipe) => {
+      return recipe.appliance;
+    })
+  );
+
   return filteredRecipes;
 }
 
@@ -35,6 +63,10 @@ async function displayData() {
   let html = "";
   console.time();
   const filteredRecipes = await filterData();
+  displaySelects();
+
+  const recipesCount = document.getElementById("count");
+  recipesCount.innerHTML = filteredRecipes.length;
 
   filteredRecipes.forEach((recipe) => {
     const recipeModel = recipesFactory(recipe);
@@ -47,6 +79,19 @@ async function displayData() {
 
   recipesSection.innerHTML = html;
   console.timeEnd();
+}
+
+function displaySelects() {
+  const ingredientsSelect = selectFactory().getSelect(
+    "Ingrédient",
+    ingredients
+  );
+  const appliancesSelect = selectFactory().getSelect("Appareils", appliances);
+  const ustensilsSelect = selectFactory().getSelect("Ustensiles", ustensils);
+
+  const selectsSection = document.getElementById("selects");
+  selectsSection.innerHTML =
+    ingredientsSelect + appliancesSelect + ustensilsSelect;
 }
 
 async function init() {

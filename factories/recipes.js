@@ -1,6 +1,5 @@
 function recipesFactory(data) {
   function getRecipeCard() {
-    console.log(data.ingredients);
     const html = `<div class="w-full md:w-[30%] bg-white rounded-xl shadow-lg">
           <img src="assets/images/illustrations/Recette${
             data.id
