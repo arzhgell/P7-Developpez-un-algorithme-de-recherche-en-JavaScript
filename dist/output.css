@@ -620,6 +620,10 @@ video {
   flex-direction: column;
 }
 
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -854,6 +858,14 @@ video {
 
   .md\:w-\[30\%\] {
     width: 30%;
+  }
+
+  .md\:w-4\/12 {
+    width: 33.333333%;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:px-16 {

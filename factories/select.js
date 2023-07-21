@@ -2,8 +2,10 @@ function selectFactory() {
   function getSelect(name, items) {
     items = Array.from(items);
 
-    const select = `<div id="${name}Container" class="bg-white rounded-xl hover:rounded-b-none relative w-4/12 h-fit group">
-      <button id="${name}Btn" class="flex items-center justify-between w-full p-4">
+    const select = `<div id="${name}Container" class="bg-white rounded-xl hover:rounded-b-none relative w-full md:w-4/12 h-fit group">
+      <button id="${name}Btn" class="flex items-center justify-between w-full p-4" onClick="clickOn(${
+      items.id
+    }})">
         ${name} <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div
